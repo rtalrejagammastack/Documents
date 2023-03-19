@@ -1,0 +1,51 @@
+rails g model model_name column_name:datatype column_name1:datatype .....
+
+rails db:migrate
+
+rails db:rollback
+rails d model model_name column_name:datatype column_name1:datatype ...
+
+Schema Version : Last execute migration timestamp
+
+rails g migration migration_name 
+
+-> Add columns:
+rails g migration add_columns_to_employees column_name:datatype
+or 
+rails g migration add_columns_to_employees
+and now write manually in the file
+add_column :table_name , :column_name , :datatype
+add_column :employees, :dob,:date
+
+-> Change column datatype
+not work: rails g migration change_columnname_to_newdatatype_in_table_name column_name:new_datatype
+or 
+rails g migration change_pincode_to_integer_in_employees
+change_column :employees, :pincode, :integer
+
+-> Rename column_name
+rails g migration rename_dob_to_dateofbirth_in_employees
+change_column :employees,:dob,:date_of_birth
+
+-> Renaming multiple columns
+change_table(:employees) do |t|
+    t.rename(:dob,:date_of_birth)
+    t.rename(:address,:my_address)
+end
+
+-> Remove Column
+rails g migration remove_middle_name_from_employees middle_name:string
+Or 
+remove_column :employees,:middle_name
+
+If type not given in both cases then we can't rollback 
+
+-> Rename Existing Column
+rails g migration rename_employee_bio_attr
+rename_column :employees,:bio,:about
+rename_column :table_name,:old_column_name,:new_column_name 
+
+----> Unable to rollback while changing column datatype after migration
+----> calculate_age and check_age....can we convert it into 1 method
+----> self.errors.add(:date_of_joining,"must be greater than todays date.") custom message
+----> documents single employee 

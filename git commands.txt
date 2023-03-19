@@ -1,0 +1,90 @@
+git clone colneurl
+git config --list
+git config user.name ""
+git config user.email ""
+git init
+git status
+git add filename
+git add .
+git restore filename : restore file to updated stage file
+git restore --staged filename : to remove file from stage area
+git commit -m "message"
+git reset --soft HEAD~1   : to remove latest commit from local
+git reset --hard HEAD^   : to remove last commit from remote
+git reset --hard HEAD~1   : to remove latest commit from remote
+git reset --hard HEAD~3   : to remove latest 3 commit from remote
+git push remoteName branchName
+git push remoteName HEAD --force   : forcely pushes commit
+git branch
+git branch -a    : displays all the branches of remote also 
+git branch branchName
+git branch -d branchName   :   to delete a branch....requires after merging
+git branch -D branchName   :   force Delete a branch...requires after rebase
+git checkout branchName/checkPointName/filename
+git checkout -b branchName      : to create a new branch and checkout to that
+git log
+git log --oneline
+gitk  : GUI representation of tree
+gitk --all
+git merge branchName :   merge this branch to currently opened branch 
+git fetch   : fetch files from remote which needs to be pull
+git fetch --all --prune : fetc files from all the remote (note: add upstream to fetch data from owners repo)
+
+diff
+stash
+merge
+rebase
+revert  
+remote
+pull
+
+
+Delete file from stage area:
+git restore --cached filename
+
+Delete a local commit :
+git reset --soft HEAD~1
+
+Completely Delete a commit from remote:(not to use)
+git reset --hard HEAD~1
+git push origin HEAD --force
+
+
+git reset commitid   :  to move to any commit
+
+
+
+add remote of owner repo
+upstream is from where we have forked that project 
+git remote add upstream "owner_repo_link"
+
+
+
+
+Suppose we have fork a repo and then some changes occured in owner main repo then we have to fetch that changes in our repo
+git fetch --all --prune
+git reset --hard --upstream/main  : Come back to owners main repo commit
+git push origin main              :push this to apply changes in your fork repo too
+
+Or simply 
+git pull --upstream main
+git push origin main
+for the same 
+
+
+
+
+
+
+
+
+Merge Conflict and squashing a conflict
+
+
+
+Squash Conflict
+Pick and squash 
+we can merge different commits before push into a single commit 
+git rebase -i commit_id        :    before merging_commits
+pick top-most file and remove pick from remaining and add s for squash in all
+merge all the s into pick
