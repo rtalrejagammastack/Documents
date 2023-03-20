@@ -1,1 +1,12 @@
-yarn add actioncable
+gem 'actioncable'
+
+bundle install
+
+rails g channel <channelName>
+
+In routes File 
+mount ActionCable.server => '/cable'
+
+In application.erb
+<%= action_cable_meta_tag %>
+
