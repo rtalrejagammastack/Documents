@@ -63,3 +63,14 @@ end
 def down 
     change_column_null :expense_sub_categories,:category_id, false
 end
+
+
+
+Add references
+add_reference :expense_sub_categories, :user, index: true
+    add_foreign_key :expense_sub_categories, :users
+    Or
+    add_reference :posts, :author, references: :users, index: true
+    author is name of column which u want
+    
+    
