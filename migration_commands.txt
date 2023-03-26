@@ -74,3 +74,10 @@ add_reference :expense_sub_categories, :user, index: true
     author is name of column which u want
     
     
+    
+    
+rails generate migration AddDefaultPriceToProducts price:decimal{10,2}:default=>0.0
+optional: true   -> field value is optional that means if we dont specify field value then it is consider as blank
+null: false   -> field must have any value
+null: true      -> field value can be nil that means if we dont specify field value then it is consider as nil
+
