@@ -49,3 +49,35 @@ rename_column :table_name,:old_column_name,:new_column_name
 ----> calculate_age and check_age....can we convert it into 1 method
 ----> self.errors.add(:date_of_joining,"must be greater than todays date.") custom message
 ----> documents single employee 
+
+
+
+
+
+
+-> Change Column null to true in references 
+    change_column_null :table_name_plural, :column_name , true
+def up
+    change_column_null :expense_sub_categories, :category_id, true
+end
+def down 
+    change_column_null :expense_sub_categories,:category_id, false
+end
+
+
+
+Add references
+add_reference :expense_sub_categories, :user, index: true
+    add_foreign_key :expense_sub_categories, :users
+    Or
+    add_reference :posts, :author, references: :users, index: true
+    author is name of column which u want
+    
+    
+    
+    
+rails generate migration AddDefaultPriceToProducts price:decimal{10,2}:default=>0.0
+optional: true   -> field value is optional that means if we dont specify field value then it is consider as blank
+null: false   -> field must have any value
+null: true      -> field value can be nil that means if we dont specify field value then it is consider as nil
+
