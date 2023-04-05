@@ -1,0 +1,58 @@
+rails g job generate_receipt
+
+-> TransactionJob
+class TransactionJob < ApplicationJob
+  queue_as :default
+
+  def perform(*args)
+    # Do something later
+    TransactionMailer.new_transaction(@transaction, current_user).deliver_now
+  end
+end
+
+
+TransactionJob.perform_later(@transaction, current_user)
+
+GuestsCleanupJob.set(wait_until: Date.tomorrow.noon).perform_later(guest)
+
+GuestsCleanupJob.set(wait: 1.week).perform_later(guest)
+
+
+GuestsCleanupJob.perform_later(guest1, guest2, filter: 'some_filter')
+
+
+
+-> Application.rb
+config.active_job.queue_adapter = :sidekiq
+
+
+As per job basis
+class GuestsCleanupJob < ApplicationJob
+  self.queue_adapter = :resque
+  # ...
+end
+
+
+
+class ExampleJob < ActiveJob::Base
+  retry_on ErrorLoadingSite, wait: 5.minutes, queue: :low_priority 
+  def perform(*args)
+    # Perform Job
+  end
+end
+
+
+
+
+
+bundle exec sidekiq -q default -q mailers
+
+
+
+
+
+UserMailer.welcome_email(@user).deliver_later(wait: 1.hour)
+UserMailer.welcome_email(@user).deliver_later(wait_until: 5.days.from_now)
+
+
+

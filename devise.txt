@@ -1,9 +1,18 @@
 
 Confirmable
--> Add in developmetn
-config.action_mailer.perform_deliveries = true
-config.action_mailer.delivery_method = :smtp
-config.action_mailer.default_url_options = { host: 'localhost:3000' }
+-> Add in development
+config.action_mailer.default_url_options = { host: ENV["MAIL_DOMAIN"], port: ENV["MAIL_PORT"] }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name:      ENV["MAIL_USERNAME"],
+    password:       ENV["MAIL_PASSWORD"],
+    domain:         ENV["MAIL_DOMAIN"],
+    address:       'smtp.gmail.com',
+    port:          '587',
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
 
 -> In application.html.erb
 <p class="notice"><%= notice %></p>
@@ -11,6 +20,30 @@ config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
 -> Add in user model
 
-:confirmable, :lockable, :timeoutable, :trackable, :omniauthable
+:confirmable
+
+-> Migration
+class AddConfirmableToDevise < ActiveRecord::Migration[6.1]
+  def up
+    add_column :users, :confirmation_token, :string
+    add_column :users, :confirmed_at, :datetime
+    add_column :users, :confirmation_sent_at, :datetime
+    add_column :users, :unconfirmed_email, :string # Only if using reconfirmable
+    add_index :users, :confirmation_token, unique: true
+    # User.reset_column_information # Need for some types of updates, but not for update_all.
+    # To avoid a short time window between running the migration and updating all existing
+    # users as confirmed, do the following
+    # User.update_all confirmed_at: DateTime.now
+    # All existing user accounts should be able to log in after this.
+  end
+
+  def down
+    remove_index :users, :confirmation_token
+    remove_columns :users, :confirmation_token, :confirmed_at, :confirmation_sent_at
+    remove_columns :users, :unconfirmed_email # Only if using reconfirmable
+  end
+end
+
+  config.reconfirmable = true
 
 

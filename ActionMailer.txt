@@ -1,0 +1,157 @@
+if
+	format.html { redirect_to(@user, notice: 'User was successfully created.') }
+        format.json { render json: @user, status: :created, location: @user }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @user.errors, status: :unprocessable_entity }
+        
+        
+config.action_mailer.default_url_options = { host:'localhost', port:3000 }
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    user_name:      '',
+    password:       '',
+    domain:         'localhost',
+    address:       'smtp.gmail.com',
+    port:          '587',
+    authentication: :plain,
+    enable_starttls_auto: true
+  }
+
+
+-> rails g mailer TransactioMailer
+class TransactionMailer < ApplicationMailer
+
+  def new_transaction(transaction, current_user)
+    @transaction = transaction
+    @user = current_user
+
+    mail to: @user.email, subject: "New Transaction:"
+  end
+end
+
+-> create 2 files for views
+new_transaction.html.erb
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Thank You for Using CahsFLo.</h1>
+    <p>
+      New Transaction Created. Details are:
+    </p>
+    <ul>
+      <li>Title: <%= @transaction.title %></li>
+      <li>Amount: <%= @transaction.amount %></li>
+      <li>Payer Name: <%= @transaction.payer_name %></li>
+      <li>Receiver NameL: <%= @transaction.receiver_name %></li>
+    </ul>
+
+    
+    <p>Thanks for joining and have a great day!</p>
+  </body>
+</html>
+TransactionMailer.new_transaction(@transaction, current_user).deliver_now
+
+
+
+new_transaction.text.erb
+Thank You for Using CahsFLo.
+===============================================
+
+New Transaction Created.
+
+Title: <%= @transaction.title %>
+Amount: <%= @transaction.amount %>
+Payer Name: <%= @transaction.payer_name %>
+Receiver NameL: <%= @transaction.receiver_name %>
+
+Thanks for joining and have a great day!
+
+
+
+
+
+
+
+attachments.inline['image.jpg'] = File.read('/path/to/image.jpg')
+
+
+
+
+<%= image_tag attachments['image.jpg'].url %>
+
+
+
+
+
+
+
+
+mail to: email_address_with_name(@user.email, @user.name), subject: "New Transaction:"
+
+
+mail(to: @user.email,
+         subject: 'Welcome to My Awesome Site',
+         template_path: 'notifications',
+         template_name: 'another')
+         
+         
+         
+mail(to: @user.email,
+         subject: 'Welcome to My Awesome Site') do |format|
+      format.html { render 'another_template' }
+      format.text { render plain: 'Render text' }
+    end
+    
+    
+
+
+
+class UserMailer < ApplicationMailer
+  layout 'awesome' # use awesome.(html|text).erb as the layout
+end
+
+
+class UserMailer < ApplicationMailer
+  def welcome_email
+    mail(to: params[:user].email) do |format|
+      format.html { render layout: 'my_layout' }
+      format.text
+    end
+  end
+end
+
+
+
+
+<%= url_for(host: 'example.com',
+            controller: 'welcome',
+            action: 'greeting') %>
+            
+            
+            
+<%= link_to 'welcome', welcome_url %>
+
+
+
+    <%= image_tag 'logo.png' %>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+        attachments.inline['image.jpg'] = File.read('/path/to/image.jpg')
+
+
+
+
+
