@@ -1,0 +1,4 @@
+
+https://www.bogotobogo.com/RubyOnRails/RubyOnRails_Devise_Authentication_Sending_Confirmation_Email.php  -> DEVISE CONFIRMABLE
+http://railsapps.github.io/rails-environment-variables.html -> ENV FILE
+https://www.youtube.com/watch?v=GXsL2p0YoHg -> Confirmable

@@ -1,0 +1,21 @@
+config.time_zone = 'Asia/Kolkata' -> config.rb
+
+Time zone not supported in sqlite
+
+
+gem 'groupdate'
+-> bundle install
+
+@transactions_by_category = Transaction.group(:category).group_by_month(:date).sum(:amount)
+
+
+gem "chartkick"
+
+-> bundle install
+-> yarn add chartkick chart.js
+-> import "chartkick/chart.js" -> application.js
+
+
+gem 'faker'
+
+-> bundle install

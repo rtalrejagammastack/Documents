@@ -1,0 +1,16 @@
+
+Confirmable
+-> Add in developmetn
+config.action_mailer.perform_deliveries = true
+config.action_mailer.delivery_method = :smtp
+config.action_mailer.default_url_options = { host: 'localhost:3000' }
+
+-> In application.html.erb
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+-> Add in user model
+
+:confirmable, :lockable, :timeoutable, :trackable, :omniauthable
+
+
