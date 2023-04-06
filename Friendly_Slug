@@ -1,0 +1,45 @@
+gem 'friendly_id'
+
+Migration of friendly id
+class CreateFriendlyIdSlugs < ActiveRecord::Migration[6.1]
+  def change
+    create_table :friendly_id_slugs do |t|
+      t.string   :slug,           :null => false
+      t.integer  :sluggable_id,   :null => false
+      t.string   :sluggable_type, :limit => 50
+      t.string   :scope
+      t.datetime :created_at
+    end
+    add_index :friendly_id_slugs, :sluggable_id
+    add_index :friendly_id_slugs, [:slug, :sluggable_type]
+    add_index :friendly_id_slugs, [:slug, :sluggable_type, :scope], :unique => true
+    add_index :friendly_id_slugs, :sluggable_type
+  end
+end
+
+
+Add column slug in models
+rails g migration addSlugToUserCategories slug:string:uniq
+class AddSlugToUserCategories < ActiveRecord::Migration[6.1]
+  def change
+    add_column :user_categories, :slug, :string
+    add_index :user_categories, :slug, unique: true
+  end
+end
+
+
+resources :user_categories, param: :slug
+
+
+class UserCategory < ApplicationRecord
+  extend FriendlyId
+  friendly_id :generated_slug, use: :slugged
+
+
+  def generated_slug
+    @random_slug ||= persisted? ? friendly_id : SecureRandom.hex(8)
+  end
+
+
+
+  @user_category = UserCategory.friendly.find(params[:slug])

@@ -1,0 +1,37 @@
+gem "paranoia"
+
+bundle install
+
+generate migration AddDeletedAtToClients deleted_at:datetime:index
+
+class AddDeletedAtToClients < ActiveRecord::Migration
+  def change
+    add_column :clients, :deleted_at, :datetime
+    add_index :clients, :deleted_at
+  end
+end
+
+
+class Client < ActiveRecord::Base
+  acts_as_paranoid
+
+
+  client.deleted_at
+
+
+  client.destroy
+  client.deleted_at
+
+
+
+  acts_as_paranoid column: :destroyed_at
+
+
+
+  Client.with_deleted
+  Client.only_deleted
+  Client.without_deleted
+  client.deleted?
+  Client.restore(id)
+  Client.restore(id, :recursive => true)
+  Client.restore([id1, id2, ..., idN])  
