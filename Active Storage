@@ -1,0 +1,42 @@
+rails active_storage:install
+rails db:migrate
+
+
+config.active_storage.service = :local
+
+
+rails generate model User avatar:attachment
+
+class User < ApplicationRecord
+  has_one_attached :avatar
+end
+
+
+# <%= form.file_field :avatar %>
+
+params.require(:user).permit(:email_address, :password, :avatar)
+
+
+user.avatar.attach(params[:avatar])
+
+Call avatar.attached? to determine whether a particular user has an avatar:
+
+
+class Message < ApplicationRecord
+  has_many_attached :images
+end
+
+bin/rails generate model Message images:attachments
+
+params.require(:message).permit(:title, :content, images: [])
+
+@message.images.attach(params[:images])
+
+@message.images.attached?
+
+
+
+@message.images.attach(io: File.open('/path/to/file'), filename: 'file.pdf')
+
+
+<%= form.file_field :attachments, multiple: true, direct_upload: true %>
