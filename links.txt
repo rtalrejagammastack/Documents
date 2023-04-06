@@ -2,3 +2,7 @@
 https://www.bogotobogo.com/RubyOnRails/RubyOnRails_Devise_Authentication_Sending_Confirmation_Email.php  -> DEVISE CONFIRMABLE
 http://railsapps.github.io/rails-environment-variables.html -> ENV FILE
 https://www.youtube.com/watch?v=GXsL2p0YoHg -> Confirmable
+https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql/ -> Postgres Windows
+https://docs.rackspace.com/support/how-to/postgresql-creating-and-dropping-roles/#:~:text=After%20you%20connect%20with%20the,the%20SQL%20statement%20is%20required. -> Postgres COmmands
+https://blog.saeloun.com/2019/10/10/rails-6-adds-support-for-multi-environment-credentials -> Credentials
+https://gist.github.com/zsyed91/5f453183bab45c7b45262283fb9ed61d -> Credentials
