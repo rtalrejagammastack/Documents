@@ -6,3 +6,6 @@ https://www.postgresqltutorial.com/postgresql-getting-started/install-postgresql
 https://docs.rackspace.com/support/how-to/postgresql-creating-and-dropping-roles/#:~:text=After%20you%20connect%20with%20the,the%20SQL%20statement%20is%20required. -> Postgres COmmands
 https://blog.saeloun.com/2019/10/10/rails-6-adds-support-for-multi-environment-credentials -> Credentials
 https://gist.github.com/zsyed91/5f453183bab45c7b45262283fb9ed61d -> Credentials
+
+
+https://blog.appsignal.com/2021/01/13/using-mixins-and-modules-in-your-ruby-on-rails-application.html
