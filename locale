@@ -1,0 +1,185 @@
+I18n.t("activerecord.error")
+
+
+<%= t :hello_world %>
+t(:hello_flash)
+
+en:
+  success:
+    'true':  'True!'
+I18n.t 'success.true'  # => 'True!'
+
+en:
+  currency: "$"
+<%= "#{t('currency')}#{@product.price}" %>
+
+en:
+  activerecord:
+    models:
+      user:
+        attributes:
+          error
+      transaction:
+        attributes:
+          amount: 'Rs. %{amount}'
+        create:
+          success: Transaction Created!
+      user_category:
+        title: "{name}"
+    error:
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+  user_mailer:
+    welcome:
+      subject: "%{user}, welcome to Rails Guides!"
+en:
+  product_price: "$%{price}"
+<%= t('product_price', price: @product.price) %>
+
+<p><%= l Time.now, format: :short %></p>
+pirate:
+  time:
+    formats:
+      short: "arrrround %H'ish"
+
+
+I18n.t :message
+I18n.t 'message'
+
+I18n.t :record_invalid, scope: [:activerecord, :errors, :messages]
+I18n.translate "activerecord.errors.messages.record_invalid"
+I18n.t 'activerecord.errors.messages.record_invalid'
+I18n.t 'errors.messages.record_invalid', scope: :activerecord
+I18n.t :record_invalid, scope: 'activerecord.errors.messages'
+I18n.t :record_invalid, scope: [:activerecord, :errors, :messages]
+
+To look up multiple translations at once, an array of keys can be passed:
+I18n.t [:odd, :even], scope: 'errors.messages'
+# => ["must be odd", "must be even"]
+
+
+
+en:
+  welcome:
+    title: "Welcome!"
+    content: "Welcome to the %{app_name}"
+
+I18n.t 'welcome', app_name: 'book store'
+# => {:title=>"Welcome!", :content=>"Welcome to the %{app_name}"}
+
+I18n.t 'welcome', deep_interpolation: true, app_name: 'book store'
+# => {:title=>"Welcome!", :content=>"Welcome to the book store"}
+
+es:
+  books:
+    index:
+      title: "Título"
+<%= t '.title' %>
+
+
+en:
+  books:
+    create:
+      success: Book created!
+redirect_to books_url, notice: t('.success')
+
+
+  
+
+en:
+  welcome: <b>welcome!</b>
+  hello_html: <b>hello!</b>
+  title:
+    html: <b>title!</b>
+<div><%= t('welcome') %></div>
+<div><%= raw t('welcome') %></div>
+<div><%= t('hello_html') %></div>
+<div><%= t('title.html') %></div>
+
+
+
+en:
+  welcome_html: "<b>Welcome %{username}!</b>"
+
+<%# This is safe, it is going to be escaped if needed. %>
+<%= t('welcome_html', username: @current_user.username) %>
+
+
+en:
+  activerecord:
+    models:
+      user: Customer
+    attributes:
+      user:
+        login: "Handle"
+
+
+en:
+  activerecord:
+    models:
+      user:
+        one: Customer
+        other: Customers
+
+
+en:
+  activerecord:
+    attributes:
+      user/role:
+        admin: "Admin"
+        contributor: "Contributor"
+
+en:
+  activerecord:
+    models:
+      user:
+        attributes:
+          error
+    error:
+
+
+activerecord.errors.models.[model_name].attributes.[attribute_name]
+activerecord.errors.models.[model_name]
+activerecord.errors.messages
+errors.attributes.[attribute_name]
+errors.messages
+
+
+activerecord.errors.models.user.attributes.name.blank
+activerecord.errors.models.user.blank
+activerecord.errors.messages.blank
+errors.attributes.name.blank
+errors.messages.blank
+validates :name, presence: true
+
+
+
+en:
+  user_mailer:
+    welcome:
+      subject: "Welcome to Rails Guides!"
+
+class UserMailer < ActionMailer::Base
+  def welcome(user)
+    mail(to: user.email, subject: default_i18n_subject(user: user.name))
+  end
+end
+en:
+  user_mailer:
+    welcome:
+      subject: "%{user}, welcome to Rails Guides!"
+
+
+en:
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+I18n.t 'date.formats.short'
+I18n.t 'formats.short', scope: :date
+I18n.t :short, scope: 'date.formats'
+I18n.t :short, scope: [:date, :formats]

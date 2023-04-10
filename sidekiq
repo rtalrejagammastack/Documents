@@ -1,0 +1,32 @@
+bundle exec sidekiq
+
+sudo apt-get update
+
+sudo apt-get install redis-server
+
+sudo systemctl start redis
+
+sudo systemctl status redis
+
+
+
+whenever
+
+gem 'whenever', require: false
+
+bundle install
+
+bundle exec wheneverize .
+
+
+every 1.minute do
+   runner "MyModel.some_method"
+   rake "example:say_hello"
+   command "/usr/bin/this_is_a_command"
+end
+
+whenever --update-crontab
+
+crontab -l
+
+whenever --clear-crontab
