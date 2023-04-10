@@ -1,0 +1,20 @@
+which ruby
+
+
+bundle exec sidekiq
+bundle exec sidekiq -q critical -q high -q default -q low
+
+bundle exec wheneverize .
+
+bundle exec whenever
+
+
+whenever --update-crontab
+
+crontab -l
+
+whenever --clear-crontab
+
+whenever --user app # set a user as which to install the crontab
+$ whenever --load-file config/my_schedule.rb # set the schedule file
+$ whenever --crontab-command 'sudo crontab' # override the crontab command

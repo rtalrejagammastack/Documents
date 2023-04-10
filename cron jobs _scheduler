@@ -1,0 +1,29 @@
+sudo service cron status
+sudo service cron stop
+sudo service cron start
+sudo apt install cron
+
+
+
+Clear Cron -> crontab-r
+Update Cron -> whenever --update-crontab
+Update Cron -> whenever --update-crontab --set environment='development'
+Check Cron -> whenever
+
+crontab.io  -> to create crontabs
+
+
+
+schedule.rb
+set :output, "log/cron.log" 
+
+set :environment, "development"
+
+# every 1.day, at: '12:01 am' do
+#   runner "DailyTransactionEmailJob.perform_now"
+# end
+
+every 1.minutes do
+  runner "DailyTransactionEmail1Job.perform_now"
+  runner "puts 'Daily Email Send'"
+end
