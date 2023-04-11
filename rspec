@@ -1,0 +1,25 @@
+gem 'rspec-rails'
+gem 'factory_bot_rails'
+
+bundle install
+
+rails g rspec:install
+
+rails g rspec:model User
+
+Run rspec :->  rspec                        all
+          ->  rspec spec/model/user         particular 
+          ->  rspec spec/model/user:5         particular line 
+
+
+application.rb
+config.generators do |g|
+      # g.test_framework :rspec 
+      g.test_framework(
+        :rspec,
+        fixtures: false,
+        view_specs: false,
+        helper_specs: false,
+        routing_specs: false,
+      )
+    end
