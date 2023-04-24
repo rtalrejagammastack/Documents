@@ -1,0 +1,24 @@
+gem 'stimulus-rails'
+
+rails g stimulus:install
+
+rails g stimulus name_of_controller
+
+data-controller 
+
+<div data-controller="dropdown">
+  <input data-toggle-target="input">
+  <button data-action="dropdown#actionName">
+</div>
+
+data-target
+targets = [ "button"]
+<button data-toggle-target="button">
+this.buttonTarget.value
+
+
+data-actions
+
+data-values 
+values = { URL:String }
+this.URLValue
