@@ -1,0 +1,32 @@
+-> rails new app -j esbuild --css bootstrap
+
+-> yarn add esbuild-rails
+
+-> created file app/esbuild.config.js
+const path = require('path')
+const rails = require('esbuild-rails')
+
+require("esbuild").build({
+  entryPoints: ["application.js"],
+  bundle: true,
+  outdir: path.join(process.cwd(), "app/assets/builds"),
+  absWorkingDir: path.join(process.cwd(), "app/javascript"),
+  plugins: [rails()],
+}).catch(() => process.exit(1))
+
+
+
+-> change in package.json
+  "scripts": {
+  "build": "node esbuild.config.mjs"
+}
+
+-> yarn build
+
+-> after that we get the application.js in assets/build
+
+
+
+esbuild.github.io
+
+github.com/excid3/esbuild-rails
